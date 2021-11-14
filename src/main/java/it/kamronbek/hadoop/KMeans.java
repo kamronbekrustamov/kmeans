@@ -170,7 +170,7 @@ public class KMeans {
                 position = positions.get(i);
                 String point = br.readLine();
                 if (row == position) {
-                    points[i] = new Point(point.split(" "));
+                    points[i] = new Point(point.split(","));
                     i++;
                 }
                 row++;
@@ -222,7 +222,7 @@ public class KMeans {
 
         try(BufferedReader br = new BufferedReader(new InputStreamReader(FileSystem.get(conf).open(new Path(pathString))))) {
             return br.lines().collect(Collectors.toList())
-                    .stream().map(line -> new Point(line.split(" "))).collect(Collectors.toList());
+                    .stream().map(line -> new Point(line.split(","))).collect(Collectors.toList());
         }
     }
 }
