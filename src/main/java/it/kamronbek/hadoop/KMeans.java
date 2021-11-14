@@ -28,7 +28,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-import it.unipi.hadoop.mapreduce.*;
 
 public class KMeans {
 
@@ -108,8 +107,8 @@ public class KMeans {
             stop = stoppingCriterion(oldCentroids, newCentroids, DISTANCE, THRESHOLD);
 
             if(stop || i == (MAX_ITERATIONS -1)) {
-                System.out.println(SilhouetteCalculator.calculate(getAllPoints(conf, INPUT), newCentroids));
-                finish(conf, newCentroids, otherArgs[1]);
+                double silhouette = SilhouetteCalculator.calculate(getAllPoints(conf, INPUT), newCentroids);
+                finish(conf, newCentroids, otherArgs[1], silhouette);
             } else {
                 // Set the new centroids in the configuration
                 for(int d = 0; d < K; d++) {
@@ -203,7 +202,7 @@ public class KMeans {
     	return points;
     }
 
-    private static void finish(Configuration conf, Point[] centroids, String output) throws IOException {
+    private static void finish(Configuration conf, Point[] centroids, String output, double silhouette) throws IOException {
         FileSystem hdfs = FileSystem.get(conf);
         FSDataOutputStream dos = hdfs.create(new Path(output + "/centroids.txt"), true);
         try(BufferedWriter br = new BufferedWriter(new OutputStreamWriter(dos))) {
@@ -213,6 +212,7 @@ public class KMeans {
                 br.write(centroid.toString());
                 br.newLine();
             }
+            br.write("Silhouette: " + silhouette);
         }
         hdfs.close();
     }
