@@ -1,0 +1,7 @@
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\mapreduce\KMeansReducer.java
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\model\Cluster.java
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\model\Point.java
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\mapreduce\KMeansMapper.java
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\KMeans.java
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\mapreduce\KMeansCombiner.java
+C:\Users\User\Desktop\kmeans\src\main\java\it\unipi\hadoop\SilhouetteCalculator.java
