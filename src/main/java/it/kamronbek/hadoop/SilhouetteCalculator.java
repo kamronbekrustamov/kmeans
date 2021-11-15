@@ -27,16 +27,21 @@ public class SilhouetteCalculator {
         }
 
         return clusters.parallelStream()
+                // Take the average silhouette score of all clusters
                 .mapToDouble(cluster -> cluster.points
+                        // Take the average of silhouette score of all points for every cluster
                         .stream().mapToDouble(point -> {
+                            // Calculate the silhouette for the point inside its cluster
                             double silhouetteInItsCluster = cluster.points
                                     .stream().mapToDouble(p -> p.distance(point)).sum() / (cluster.points.size() - 1);
+                            // Calculate the silhouette for the point versus nearest cluster
                             double minSilhouetteInExternalClusters = clusters.
                                     stream()
                                     .filter(c -> !c.equals(cluster))
                                     .mapToDouble(
                                             c -> c.points.stream().mapToDouble(p -> p.distance(point)).sum() / c.points.size()
                                     ).min().getAsDouble();
+                            // return (b - a) / Max(a, b)
                             return (minSilhouetteInExternalClusters - silhouetteInItsCluster)
                                     / Math.max(minSilhouetteInExternalClusters, silhouetteInItsCluster);
                         }).sum() / cluster.points.size())
