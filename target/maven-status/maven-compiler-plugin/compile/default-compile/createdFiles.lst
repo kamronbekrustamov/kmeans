@@ -1,7 +1,0 @@
-it\unipi\hadoop\mapreduce\KMeansMapper.class
-it\unipi\hadoop\model\Cluster.class
-it\unipi\hadoop\mapreduce\KMeansReducer.class
-it\unipi\hadoop\model\Point.class
-it\unipi\hadoop\KMeans.class
-it\unipi\hadoop\mapreduce\KMeansCombiner.class
-it\unipi\hadoop\SilhouetteCalculator.class
